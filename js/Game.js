@@ -4,6 +4,8 @@ var game = new Phaser.Game(720, 1280, Phaser.AUTO, 'phaser-example', { preload: 
 function preload() {
 
     game.load.image('pencil', 'assets/img/pencil.png');
+    game.load.image('Stamp_circle', 'assets/img/item_0008.png');
+    game.load.image('Color_circle', 'assets/img/item_0008_1.png');
     game.load.image('eraser', 'assets/img/eraser.png');
     game.load.image('white', 'assets/img/white.png');
 
@@ -38,12 +40,20 @@ function create() {
     var Brush = game.add.sprite(100, 1000, "pencil");
     Brush.inputEnabled = true;
     Brush.events.onInputDown.add(function(){
-        //this['material'];
+        //[material].tint = 0xFFFFFF;
         eval(material + ".tint = 0xFFFFFF");
         Brush.tint = 0x808080;
         material = "Brush";
     }, this);
-
+    // stamp tool
+    var Stamp_circle = game.add.sprite(200, 1000, "Stamp_circle");
+    Stamp_circle.inputEnabled = true;
+    Stamp_circle.events.onInputDown.add(function(){
+        eval(material + ".tint = 0xFFFFFF");
+        Stamp_circle.tint = 0x808080;
+        material = "Stamp_circle";
+    }, this);
+    // eraser
     var Eraser = game.add.sprite(500, 1000, "eraser");
     Eraser.inputEnabled = true;
     Eraser.events.onInputUp.add(function(){
@@ -64,11 +74,11 @@ function startDrawing(pointer, x, y) {
             game.input.addMoveCallback(onDraw, this);
             break;
         case "Stamp_circle":
-            //var Stamp = MG.game.make.sprite(0, 0, "Color_circle");
-            //Stamp.anchor.set(0.5);
-            //Stamp.tint = this.currentColour;
-            //this.bitmaps[this.visibleGraphics].draw(Stamp, MG.game.input.x, MG.game.input.y);
-            //break;
+            var Stamp = game.make.sprite(0, 0, "Color_circle");
+            Stamp.anchor.set(0.5);
+            Stamp.tint = this.currentColour;
+            bmd.draw(Stamp, game.input.x, game.input.y);
+            break;
     }
 }
 
