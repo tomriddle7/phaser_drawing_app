@@ -76,7 +76,7 @@ function startDrawing(pointer, x, y) {
         case "Stamp_circle":
             var Stamp = game.make.sprite(0, 0, "Color_circle");
             Stamp.anchor.set(0.5);
-            Stamp.tint = this.currentColour;
+            Stamp.tint = currentColour;
             bmd.draw(Stamp, game.input.x, game.input.y);
             break;
     }
